@@ -48,11 +48,11 @@ void ExtInterrupt_init(Ext_interrupt_t *ext_object)
   
        if(ext_object->interrupt_mode ==RISING_EDGE_MODE)
        {
-           MCUCSR_REG->ISC2BIT = 1; 
+           MCUCSR_REG->ISC2bit = 1; 
        }
        else if (ext_object->interrupt_mode == FALLING_EDGE_MODE)
        {
-            MCUCSR_REG->ISC2BIT = 0; 
+            MCUCSR_REG->ISC2bit = 0; 
        }
        else{}  
     }
