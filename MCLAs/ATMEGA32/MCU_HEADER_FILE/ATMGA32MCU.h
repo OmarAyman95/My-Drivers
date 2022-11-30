@@ -356,40 +356,6 @@ struct
 
 typedef union
 {
-volatile uint8_t _MCUCR;
-struct
-{
-	volatile uint8_t ISC00BIT   :1 ;
-	volatile uint8_t ISC01BIT   :1 ;
-	volatile uint8_t ISC10BIT   :1 ;
-	volatile uint8_t ISC11BIT   :1 ;
-	volatile uint8_t SM0BIT     :1 ;
-	volatile uint8_t SM1BIT     :1 ;
-	volatile uint8_t SM2BIT     :1 ;
-    volatile uint8_t SEBIT      :1 ;
-};
-}MCUCR_t;
-
-
-typedef union
-{
-volatile uint8_t _MCUCSR;
-struct
-{
-	volatile uint8_t PORFBIT    :1 ;
-	volatile uint8_t EXTRFBIT   :1 ;
-	volatile uint8_t BORFBIT    :1 ;
-	volatile uint8_t WDRFBIT    :1 ;
-	volatile uint8_t JTRFBIT    :1 ;
-	volatile uint8_t UNUSED     :1 ;
-	volatile uint8_t ISC2BIT    :1 ;
-    volatile uint8_t JTDBIT     :1 ;
-};
-}MCUCSR_t;
-
-
-typedef union
-{
 volatile uint8_t _SFIOR;
 struct
 {
@@ -419,7 +385,7 @@ struct
 	volatile uint8_t SM2bit        :1 ;
     volatile uint8_t SEbit         :1 ;
 };
-}MCUCR_REG_t;
+}MCUCR_type;
 
 
 typedef union
@@ -436,7 +402,7 @@ struct
 	volatile uint8_t ISC2bit        :1 ;
     volatile uint8_t JTDbit         :1 ;
 };
-}MCUSCR_t;
+}MCUCSR_type;
 
 
 typedef union
@@ -494,8 +460,8 @@ struct
 
 #define   SREG_REG                  ((volatile SREG_t *)(SREG_BASE))
 #define   GICR_REG                  ((volatile GICR_REG_t *)(GICR_BASE))
-#define   MCUCR_REG                 ((volatile MCUCR_t *)(MCUCR_BASE))
-#define   MCUCSR_REG                ((volatile MCUCSR_t *)(MCUCSR_BASE))
+#define   MCUCR_REG                 ((volatile MCUCR_type *)(MCUCR_BASE))
+#define   MCUCSR_REG                ((volatile MCUCSR_type *)(MCUCSR_BASE))
 #define   SFIOR_REG                 ((volatile SFIOR_t *)(SFIOR_BASE))
 
 
