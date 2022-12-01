@@ -419,7 +419,7 @@ struct
 	volatile uint8_t INT0bit        :1 ;
     volatile uint8_t INT1bit        :1 ;
 };
-}GICR_REG_t;
+}GICR_type;
 
 
 typedef union
@@ -433,6 +433,57 @@ struct
     volatile uint8_t INT1bit        :1 ;
 };
 }GIFR_REG_t;
+
+typedef union
+{
+volatile uint8_t _TCCR0;
+struct
+{
+	volatile uint8_t CS00bit           :1 ;
+	volatile uint8_t CS01bit           :1 ;
+	volatile uint8_t CS02bit           :1;
+    volatile uint8_t WGM01bit          :1 ;
+    volatile uint8_t COM00bit          :1 ;
+	volatile uint8_t COM01bit          :1 ;
+	volatile uint8_t WGM00bit          :1 ;
+    volatile uint8_t FOC0bit           :1 ;
+};
+}TCCR0_type;
+
+
+typedef union
+{
+volatile uint8_t _TIFR;
+struct
+{
+	volatile uint8_t TOV0bit           :1 ;
+	volatile uint8_t OCF0bit           :1 ;
+	volatile uint8_t TOV1bit           :1;
+    volatile uint8_t OCF1Bbit          :1 ;
+    volatile uint8_t OCF1Abit          :1 ;
+	volatile uint8_t ICF1bit          :1 ;
+	volatile uint8_t TOV2bit          :1 ;
+    volatile uint8_t OCF2bit           :1 ;
+};
+}TIFR_type;
+
+
+typedef union
+{
+volatile uint8_t _TIMSK;
+struct
+{
+	volatile uint8_t TOIE0bit            :1 ;
+	volatile uint8_t OCIE0bit            :1 ;
+	volatile uint8_t TOIE1bit           :1;
+    volatile uint8_t OCIE1Bbit           :1 ;
+    volatile uint8_t OCIE1Abit           :1 ;
+	volatile uint8_t TICIE1bit           :1 ;
+	volatile uint8_t TOIE2bit           :1 ;
+    volatile uint8_t OCIE2bit            :1 ;
+};
+}TIMSK_type;
+
 
 
 
@@ -459,12 +510,16 @@ struct
 #define   PORTD_REG                 ((volatile PORTD_t *)(PORTD_BASE))
 
 #define   SREG_REG                  ((volatile SREG_t *)(SREG_BASE))
-#define   GICR_REG                  ((volatile GICR_REG_t *)(GICR_BASE))
+#define   GICR_REG                  ((volatile GICR_type *)(GICR_BASE))
 #define   MCUCR_REG                 ((volatile MCUCR_type *)(MCUCR_BASE))
 #define   MCUCSR_REG                ((volatile MCUCSR_type *)(MCUCSR_BASE))
 #define   SFIOR_REG                 ((volatile SFIOR_t *)(SFIOR_BASE))
 
-
+#define   TCCR0_REG                 ((volatile TCCR0_type *)(TCCR0_BASE))                  
+#define   TCNT0_REG                 (*((volatile uint8_t *)(TCNT0_BASE)))
+#define   OCR0_REG                  ((volatile uint8_t *)(OCR0_BASE))
+#define   TIMSK_REG                 ((volatile TIMSK_type *)(TIMSK_BASE))                  
+#define   TIFR_REG                  ((volatile TIFR_type *)(TIFR_BASE))                  
 
 
 //Generic Macros:
