@@ -1,7 +1,11 @@
+/* 
+ * File:   delay.h
+ * Author: OMAR AYMAN
+ *
+ * Created on December 1, 2022, 1:53 AM
+ */
+
 #include "EXTI.h" 
-
-
-
 
 /**================================================================
 * ExtInterrupt_init
@@ -63,7 +67,8 @@ void ExtInterrupt_init(Ext_interrupt_t *ext_object)
 ISR(INT0_vect)
 {
     //PORTB_Toggle_pin(_PIN0);
-    PORT_Toggle_pin(GPIOB,_PIN0);
+    PORT_Toggle_pin(GPIOB,_PIN5);
+    OCR0_REG +=10;
 }
 ISR(INT1_vect)
 {
@@ -73,6 +78,7 @@ ISR(INT1_vect)
 ISR(INT2_vect)
 {
     // PORTB_Toggle_pin(_PIN3);
-      PORT_Toggle_pin(GPIOB,_PIN3);
+      PORT_Toggle_pin(GPIOB,_PIN4);
+      OCR0_REG -=10;
    
 }
