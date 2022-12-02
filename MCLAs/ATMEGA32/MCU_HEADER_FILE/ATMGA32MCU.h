@@ -1,6 +1,6 @@
 /* 
  * File:   ATMGA32MCU.h
- * Author: OMAR
+ * Author: OMAR AYMAN
  *
  * Created on November 28, 2022, 3:57 AM
  */
@@ -517,7 +517,7 @@ struct
 
 #define   TCCR0_REG                 ((volatile TCCR0_type *)(TCCR0_BASE))                  
 #define   TCNT0_REG                 (*((volatile uint8_t *)(TCNT0_BASE)))
-#define   OCR0_REG                  ((volatile uint8_t *)(OCR0_BASE))
+#define   OCR0_REG                  (*((volatile uint8_t *)(OCR0_BASE)))
 #define   TIMSK_REG                 ((volatile TIMSK_type *)(TIMSK_BASE))                  
 #define   TIFR_REG                  ((volatile TIFR_type *)(TIFR_BASE))                  
 
