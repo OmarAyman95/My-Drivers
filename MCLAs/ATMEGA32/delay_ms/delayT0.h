@@ -2,22 +2,24 @@
  * File:   delay.h
  * Author: OMAR AYMAN
  *
- * Created on December 1, 2022, 1:53 AM
+ * Created on December 6, 2022, 2:02 AM
  */
 
 #ifndef DELAY_H
-#define	DELAY_H
+#define DELAY_H
 
 #include"ATMGA32MCU.h"
-#define Fclk_CPU        16000000UL
+
+//edit this MACRO (FCLK_CPU) when you change the cpu frequency 
+//this frequency should be written ______in (HZ)_____ not in (MHZ) or (KHZ)
+#define FCLK_CPU        10000000UL 
+
+
+
 
 //do NOT edit any of those MACROs
-#define PS_NO()         TCCR0_REG->_TCCR0 &= ~(0b00000111U);//No PS
-#define PS_8()          TCCR0_REG->_TCCR0 |=(0b00000010U);//PS = 8
-#define PS_64()         TCCR0_REG->_TCCR0 |=(0b00000011U);//PS = 64
-#define PS_256()        TCCR0_REG->_TCCR0 |=(0b00000100U);//PS = 256
-#define PS_1024()       TCCR0_REG->_TCCR0 |=(0b00000101U);//PS = 1024
-
+#define FCLK_MHZ FCLK_CPU/1000000UL
+#define XDELAY (FCLK_MHZ*1980UL/16UL)
 
 /**================================================================
 * delay_ms
@@ -31,19 +33,19 @@
  *             frequency of the cpu.
 * it returns nothing !
 **/
-void delay_ms(uint32_t t);
 
+void delay_ms(int t);
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 extern "C" {
 #endif
 
 
 
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 }
 #endif
 
-#endif	/* DELAY_H */
+#endif  /* DELAY_H */
 
