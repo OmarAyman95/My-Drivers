@@ -2,14 +2,12 @@
  * File:   SPImega32.h
  * Author: OMAR
  *
- * Created on December 28, 2022, 6:24 PM
+ * Created on December 31, 2022, 6:28 PM
  */
 
 #ifndef SPIMEGA32_H
-#define	SPIMEGA32_H
+#define  SPIMEGA32_H
 
-#include <stdint.h>
-#include <stdlib.h>
 #include <avr/interrupt.h>
 #include"ATMGA32MCU.h"
 #include"GPIO_MEGA32.h"
@@ -54,27 +52,49 @@ typedef struct
 #define SPI_SECOND_EDGE_SAMPLING    (1U<<2) //SPCR
 #define SPI_FIRST_EDGE_SAMPLING     (0U<<2) //SPCR
 
-//CSS MACROs
-#define CSS_LOW()   PORT_Reset_pin(GPIOB,_PIN4)
-#define CSS_HIGH()  PORT_Set_pin(GPIOB,_PIN4)
-
 //prototypes
 
+/**================================================================
+* SPI_init
+* this function initializes SPI module
+* INPUTS : it takes 1 argument  :
+* 1. SPI_OBJ : make sure you add one object of this struct 
+ * in your app layer and initialize it properly as your project needs 
+* it returns nothing !
+ */
 void SPI_init(SPI_config *SPI_OBJ);
+/**================================================================
+* SPI_Dinit
+* this function Resets SPI module, it just clears two registers 
+ * SPCR,SPSR.
+* it returns nothing !
+ */
 void SPI_Dinit(void);
+/* SPI_Send
+* this function send 1 byte through SPI bus to other peripherals on the bus 
+* INPUTS : it takes 1 argument  :
+* 1. DATA : Data you want to send (1 byte )
+* it returns nothing !
+ */
 void SPI_Send(uint8_t DATA);
+
+/* SPI_Recieve
+* this function receives 1 byte from other peripherals attached on the bus 
+* INPUTS : it takes nothing  : 
+* it returns received byte of data !
+ */
 uint8_t SPI_Recieve(void);
 
-#ifdef	__cplusplus
+#ifdef   __cplusplus
 extern "C" {
 #endif
 
 
 
 
-#ifdef	__cplusplus
+#ifdef   __cplusplus
 }
 #endif
 
-#endif	/* SPIMEGA32_H */
+#endif   /* SPIMEGA32_H */
 
