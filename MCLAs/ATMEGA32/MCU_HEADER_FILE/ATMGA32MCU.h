@@ -103,6 +103,9 @@
 #define TWAR_BASE                   (0x22U)
 #define TWSR_BASE                   (0x21U)
 #define TWBR_BASE                   (0x20U)
+
+
+#define USART_BASE                  (0x29U)
 //Peripheral registers:
 
 
@@ -354,21 +357,7 @@ struct
 };
 }GICR_t;
 
-typedef union
-{
-volatile uint8_t _SFIOR;
-struct
-{
-	volatile uint8_t PSR10BIT       :1 ;
-	volatile uint8_t PSR2BIT        :1 ;
-	volatile uint8_t PUDBIT         :1 ;
-	volatile uint8_t ACMEBIT        :1 ;
-	volatile uint8_t UNUSED         :1 ;
-	volatile uint8_t ADTS0BIT       :1 ;
-	volatile uint8_t ADTS1BIT       :1 ;
-    volatile uint8_t ADTS2BIT       :1 ;
-};
-}SFIOR_t;
+
 
 
 typedef union
@@ -484,6 +473,145 @@ struct
 };
 }TIMSK_type;
 
+typedef union
+{
+volatile uint8_t _UBRRH_UCSRC;
+struct
+{
+	volatile uint8_t UBRR8bit_UCPOLbit              :1 ;
+	volatile uint8_t UBRR9bit_UCSZ0bit              :1 ;
+	volatile uint8_t UBRR10bit_UCSZ1bit             :1;
+    volatile uint8_t UBRR11bit_USBSbit              :1 ;
+    volatile uint8_t UPM0bit                        :1 ;
+	volatile uint8_t UPM1bit                        :1 ;
+	volatile uint8_t UMSELbit                       :1 ;
+    volatile uint8_t URSELbit                       :1 ;
+};
+}UBRRH_UCSRC_type;
+
+typedef union
+{
+volatile uint8_t _UCSRA;
+struct
+{
+	volatile uint8_t MPCMbit        :1 ;
+	volatile uint8_t U2Xbit         :1 ;
+	volatile uint8_t PEbit          :1;
+    volatile uint8_t DORbit         :1 ;
+    volatile uint8_t FEbit          :1 ;
+	volatile uint8_t UDREbit        :1 ;
+	volatile uint8_t TXCbit         :1 ;
+    volatile uint8_t RXCbit         :1 ;
+};
+}UCSRA_type;
+
+typedef union
+{
+volatile uint8_t _UCSRB;
+struct
+{
+	volatile uint8_t TXB8bit           :1 ;
+	volatile uint8_t RXB8bit           :1 ;
+	volatile uint8_t UCSZ2bit          :1 ;
+    volatile uint8_t TXENbit           :1 ;
+    volatile uint8_t RXENbit           :1 ;
+	volatile uint8_t UDRIEbit          :1 ;
+	volatile uint8_t TXCIEbit          :1 ;
+    volatile uint8_t RXCIEbit          :1 ;
+};
+}UCSRB_type;
+
+
+typedef struct
+{
+	volatile uint8_t            UBRRL_R ;
+	volatile UCSRB_type         UCSRB_R;
+    volatile UCSRA_type         UCSRA_R;
+    volatile uint8_t            UDR_R;
+    volatile uint8_t            UnUsed[19];
+    volatile UBRRH_UCSRC_type   UBRRH_UCSRC_R;
+}USART_type;
+
+
+typedef union
+{
+volatile uint8_t _SPCR;
+struct
+{
+	volatile uint8_t       SPR0bit:1 ;
+	volatile uint8_t       SPR1bit:1 ;
+	volatile uint8_t       CPHAbit:1 ;
+	volatile uint8_t       CPOLbit:1 ;
+	volatile uint8_t       MSTRbit:1 ;
+	volatile uint8_t       DORDbit:1 ;
+	volatile uint8_t       SPEbit:1 ;
+    volatile uint8_t       SPIEbit:1 ;
+};
+}SPCR_type;
+
+typedef union
+{
+volatile uint8_t _SPSR;
+struct
+{
+	volatile uint8_t       SPI2Xbit:1 ;
+	volatile uint8_t       UNused:5 ;
+	volatile uint8_t       WCOLbit:1 ;
+	volatile uint8_t       SPIFbit:1 ;
+};
+}SPSR_type;
+
+
+
+
+
+typedef union
+{
+volatile uint8_t _ADMUX;
+struct
+{
+	volatile uint8_t       MUX0bit:1 ;
+	volatile uint8_t       MUX1bit:1 ;
+	volatile uint8_t       MUX2bit:1 ;
+	volatile uint8_t       MUX3bit:1 ;
+	volatile uint8_t       MUX4bit:1 ;
+	volatile uint8_t       ADLARbit:1 ;
+	volatile uint8_t       REFS0bit:1 ;
+    volatile uint8_t       REFS1bit:1 ;
+};
+}ADMUX_type;
+
+typedef union
+{
+volatile uint8_t _ADCSRA;
+struct
+{
+	volatile uint8_t        ADPS0bit:1 ;
+	volatile uint8_t        ADPS1bit:1 ;
+	volatile uint8_t        ADPS2bit:1 ;
+	volatile uint8_t        ADIEbit:1 ;
+	volatile uint8_t        ADIFbit:1 ;
+	volatile uint8_t        ADATEbit:1 ;
+	volatile uint8_t        ADSCbit:1 ;
+    volatile uint8_t        ADENbit:1 ;
+};
+}ADCSRA_type;
+
+typedef union
+{
+volatile uint8_t _SFIOR;
+struct
+{
+	volatile uint8_t PSR10BIT       :1 ;
+	volatile uint8_t PSR2BIT        :1 ;
+	volatile uint8_t PUDBIT         :1 ;
+	volatile uint8_t ACMEBIT        :1 ;
+	volatile uint8_t UNUSED         :1 ;
+	volatile uint8_t ADTS0BIT       :1 ;
+	volatile uint8_t ADTS1BIT       :1 ;
+    volatile uint8_t ADTS2BIT       :1 ;
+};
+}SFIOR_t;
 
 
 
@@ -513,7 +641,7 @@ struct
 #define   GICR_REG                  ((volatile GICR_type *)(GICR_BASE))
 #define   MCUCR_REG                 ((volatile MCUCR_type *)(MCUCR_BASE))
 #define   MCUCSR_REG                ((volatile MCUCSR_type *)(MCUCSR_BASE))
-#define   SFIOR_REG                 ((volatile SFIOR_t *)(SFIOR_BASE))
+
 
 #define   TCCR0_REG                 ((volatile TCCR0_type *)(TCCR0_BASE))                  
 #define   TCNT0_REG                 (*((volatile uint8_t *)(TCNT0_BASE)))
@@ -521,7 +649,24 @@ struct
 #define   TIMSK_REG                 ((volatile TIMSK_type *)(TIMSK_BASE))                  
 #define   TIFR_REG                  ((volatile TIFR_type *)(TIFR_BASE))                  
 
+#define   UBRRH_UCSRC_REG           ((volatile UBRRH_UCSRC_type *)(UBRRH_UCSRC_BASE))   
+#define   UDR_REG                   (*((volatile uint8_t*)(UDR_BASE)))
+#define   UBRRL_REG                 (*((volatile uint8_t*)(UBRRL_BASE)))
+#define   UCSRA_REG                 ((volatile UCSRA_type *)(UCSRA_BASE))
+#define   UCSRB_REG                 ((volatile UCSRB_type *)(UCSRB_BASE))
+#define   USART_REGs                ((volatile USART_type*)(USART_BASE))
 
+#define   SPCR_REG                  ((volatile SPCR_type*)(SPCR_BASE))
+#define   SPSR_REG                  ((volatile SPSR_type*)(SPSR_BASE))
+#define   SPDR_REG                  (*((volatile uint8_t*)(SPDR_BASE)))
+
+
+
+#define   ADCL_REG                  (*((volatile uint8_t*)(ADCL_BASE)))
+#define   ADCH_REG                  (*((volatile uint8_t*)(ADCH_BASE)))
+#define   ADCSRA_REG                ((volatile ADCSRA_type *)(ADCSRA_BASE))
+#define   ADMUX_REG                 ((volatile ADMUX_type *)(ADMUX_BASE))
+#define   SFIOR_REG                 ((volatile SFIOR_t *)(SFIOR_BASE))
 //Generic Macros:
 //-----------------------------
 //-----------------------------
