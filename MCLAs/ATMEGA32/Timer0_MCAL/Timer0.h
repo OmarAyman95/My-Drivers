@@ -97,7 +97,7 @@ void TMR0_FAST_PWM_MODE_Init(uint32_t Foscn ,uint8_t DutyCycle);
 /**================================================================
 * TMR0_CTC_MODE_Init
 * this function initializes Timer0 when user want to use CTC mode
-* INPUTS : it takes 2 arguments :
+* INPUTS : it takes 1 argument :
 * 1.Foscn     >>> CTC frequency in HZ
 * it returns nothing !
 **/
