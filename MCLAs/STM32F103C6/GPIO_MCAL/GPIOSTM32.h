@@ -1,16 +1,21 @@
 /*
- * GPIOSTM32.h
- *
- *  Created on: Nov 21, 2022
- *      Author: OMAR
+ *  File : GPIOSTM32.h
+ *  Author: OMAR MOHAMED AYMAN
+ *  this MCAL file is used with STM32F103C6 MCU ARM-CORTEX-M3 based processor
+ *  it contains APIs to read/write on the GPIO pins of the MCU
+ *  Created on Nov 21, 2022     
  */
 
 #ifndef SRC_GPIOSTM32_H_
 #define SRC_GPIOSTM32_H_
 
+
+/*--------------------------------includes----------------------------------*/
 #include "STM32F103.h"
 ////////////////////////////////port initializations MACROs/////////////////////////////////////
 
+
+/*--------------------------------macros----------------------------------*/
 //PIN_INPUT_MODES_MACROS
 #define INPUT_ANALOG         		 (0U)
 #define INPUT_FLOATING       		 (1U<<2)
@@ -63,7 +68,7 @@
 
 
 
-
+/*--------------------------------prototypes----------------------------------*/
 void GPIO_Init_Input_Pin(volatile GPIO_t  *PORT,unsigned pin,unsigned input_mode,unsigned up_down);
 void GPIO_Init_Output_Pin(volatile GPIO_t  *PORT,unsigned pin,unsigned output_mode);
 void GPIO_Set_Pin_Atomic(volatile GPIO_t  *PORT,unsigned pin);
