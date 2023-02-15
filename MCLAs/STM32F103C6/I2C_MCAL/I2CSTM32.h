@@ -1,18 +1,23 @@
 /*
- * I2CSTM32.h
- *
+ *  File : I2CSTM32.h
+ *  Author: OMAR MOHAMED AYMAN
+ *  https://github.com/OmarAyman95
+ *  ommoor642@hotmail.com
+ *  this MCAL file is used with STM32F103C6 MCU ARM-CORTEX-M3 based processor
+ *  it contains APIs to Send/recieve data through I2C Module of the MCU
  *  Created on: JAN 1, 2023
- *      Author: OMAR AYMAN
  */
 
 #ifndef SRC_I2CSTM32_H_
 #define SRC_I2CSTM32_H_
 
+
+/*----------------------------------------includes----------------------------*/
 #include "STM32F103.h"
 #include "GPIOSTM32.h"
 
 
-#define FAPB1_CLK_SPEED 				(8UL)
+/*---------------------User Defined DataTypes----------------------------*/
 
 typedef struct
 {
@@ -54,9 +59,6 @@ typedef enum
 	,MASTER_BYTE_TRANSMITTING = ((uint32_t)(0x00070080UL))
 }Status;
 
-
-#define I2C_EVENT_MASTER_BYTE_TRANSMITTING				(0x00070080UL)
-
 typedef struct
 {
 	uint32_t 								I2CBusSpeed; //@ref BUS_SPEED
@@ -73,6 +75,12 @@ typedef struct
 
 
 
+
+/*----------------------------------------Macros----------------------------*/
+
+
+#define FAPB1_CLK_SPEED 				                  (8UL)
+#define I2C_EVENT_MASTER_BYTE_TRANSMITTING				(0x00070080UL)
 /*
  *    fPCLK1 must be at least 2 MHz to achieve Sm mode I²C frequencies.
  *        It must be at least 4 MHz to achieve Fm mode I²C frequencies.
@@ -134,7 +142,7 @@ typedef struct
 	1: SMBus mode
  * */
 
-#define I2C_I2C_MODE							(0U)
+#define I2C_I2C_MODE							   (0U)
 #define I2C_SMBUS_MODE							(I2C_CR1_SMBUS)
 
 
@@ -183,7 +191,7 @@ typedef struct
 
 
 //===============================================================================
-//______________________________________________APIs____________________________________
+//__________________________APIs prototypes____________________________________
 //===========================================================================
 /**================================================================
 * I2C_init

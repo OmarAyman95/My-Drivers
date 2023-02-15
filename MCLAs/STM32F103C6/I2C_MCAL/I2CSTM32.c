@@ -1,35 +1,33 @@
 /*
- * I2CSTM32.c
- *
- *  Created on: Dec 30, 2022
- *      Author: OMAR
+ *  File : I2CSTM32.c
+ *  Author: OMAR MOHAMED AYMAN
+ *  https://github.com/OmarAyman95
+ *  ommoor642@hotmail.com
+ *  this MCAL file is used with STM32F103C6 MCU ARM-CORTEX-M3 based processor
+ *  it contains APIs to Send/recieve data through I2C Module of the MCU
+ *  Created on: JAN 1, 2023
  */
 
+
+
+/*-------------------------includes--------------------------------*/
 #include "I2CSTM32.h"
 
 
-I2C_config gI2C_structs[2];
-
+/*-------------------------helper Macros---------------------------*/
 #define I2C1_INDEX                        0U
 #define I2C2_INDEX                        1U
 
-static void I2C_GPIO_Init(volatile I2C_t *I2Cx)
-{
-	RCC_GPIOB_CLOCK_EN();
-	if(I2Cx==I2C_1)
-	{
-		/*PB6 I2C1_SCL     PB7 I2C1_SDA*/
-		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN6,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
-		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN7,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
-	}
-	else if(I2Cx==I2C_2)
-	{
-		/*PB10 I2C2_SCL    PB11 I2C2_SDA*/
-		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN10,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
-		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN11,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
-	}
-}
 
+
+
+/*-------------------------helper Global variables--------------------------*/
+static I2C_config gI2C_structs[2];
+/*-------------------------helper fuctions declarations------------------*/
+static void I2C_GPIO_Init(volatile I2C_t *I2Cx);
+
+
+/*-------------------------APIs Defintions------------------------------*/
 void I2C_init(volatile I2C_t *I2Cx ,I2C_config *I2C_init_struct)
 {
 
@@ -541,4 +539,22 @@ void I2C1_EV_IRQHandler(void)
 void I2C2_EV_IRQHandler(void)
 {
 
+}
+
+/*-------------------------helper function Definition------------------------*/
+static void I2C_GPIO_Init(volatile I2C_t *I2Cx)
+{
+	RCC_GPIOB_CLOCK_EN();
+	if(I2Cx==I2C_1)
+	{
+		/*PB6 I2C1_SCL     PB7 I2C1_SDA*/
+		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN6,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
+		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN7,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
+	}
+	else if(I2Cx==I2C_2)
+	{
+		/*PB10 I2C2_SCL    PB11 I2C2_SDA*/
+		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN10,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
+		GPIO_Init_Output_Pin(GPIOB,GPIO_PIN11,OUTPUT_ALT_OPEN_DRAIN_10MHZ);
+	}
 }
