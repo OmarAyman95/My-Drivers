@@ -253,7 +253,7 @@ void I2C_Master_Rx(volatile I2C_t *I2Cx , uint16_t Slave_address , uint8_t *data
 void I2C_Generate_Start(volatile I2C_t *I2Cx , Functional_State Newstate, Repeated_Start_State start);
 //===========================================================================
 /**================================================================
-* I2C_Generate_Start
+* I2C_Generate_Stop
 * this function used to generate stop at the end of packets from master to slaves
 * INPUTS : it takes 3 arguments :
 * 1. I2Cx  				  >>> I2C_1 Or I2C_2

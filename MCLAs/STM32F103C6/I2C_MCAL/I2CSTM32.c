@@ -28,6 +28,16 @@ static void I2C_GPIO_Init(volatile I2C_t *I2Cx);
 
 
 /*-------------------------APIs Defintions------------------------------*/
+
+/**================================================================
+* I2C_init
+* this function init I2C Module, so it is able to
+* work in different modes
+* INPUTS : it takes 2 arguments :
+* 1. I2Cx  				  >>> I2C_1 Or I2C_2
+* 2. I2C_init_struct      >>> configuration structure
+* it returns nothing !
+ */
 void I2C_init(volatile I2C_t *I2Cx ,I2C_config *I2C_init_struct)
 {
 
@@ -156,7 +166,14 @@ void I2C_init(volatile I2C_t *I2Cx ,I2C_config *I2C_init_struct)
 	}
 }
 
-
+//===========================================================================
+/**================================================================
+* I2C_Dinit
+* this function Reset I2Cx module and disable the interrupts of the module
+* INPUTS : it takes 1 argument :
+* 1. I2Cx  				  >>> I2C_1 Or I2C_2
+* it returns nothing !
+	 */
 void I2C_Dinit(volatile I2C_t *I2Cx)
 {
 	if(I2Cx==I2C_1)
@@ -174,7 +191,7 @@ void I2C_Dinit(volatile I2C_t *I2Cx)
 
 }
 
-Flag_Status I2C_Get_Flag_Status(volatile I2C_t *I2Cx ,Status flag)
+static Flag_Status I2C_Get_Flag_Status(volatile I2C_t *I2Cx ,Status flag)
 {
 	Flag_Status bitstatus = RESET ;
 	volatile uint32_t dummy ;
@@ -248,6 +265,16 @@ Flag_Status I2C_Get_Flag_Status(volatile I2C_t *I2Cx ,Status flag)
 
 	return bitstatus ;
 }
+//===========================================================================
+/**================================================================
+* I2C_Generate_Start
+* this function used to generate start, repeated start from master to slaves
+* INPUTS : it takes 3 arguments :
+* 1. I2Cx  				  >>> I2C_1 Or I2C_2
+* 2. Newstate             >>> Functional_State its enumeration data type @ref "Functional_State"
+* 3. start         		  >>> start_state its enumeration data type@ref "Repeated_Start_State"
+* it returns nothing !
+ */
 void I2C_Generate_Start(volatile I2C_t *I2Cx , Functional_State Newstate, Repeated_Start_State start)
 {
 
@@ -286,7 +313,15 @@ void I2C_Generate_Start(volatile I2C_t *I2Cx , Functional_State Newstate, Repeat
 		I2Cx->I2C_CR1 &= ~(I2C_CR1_START);
 	}
 }
-
+//===========================================================================
+/**================================================================
+* I2C_Generate_Stop
+* this function used to generate stop at the end of packets from master to slaves
+* INPUTS : it takes 3 arguments :
+* 1. I2Cx  				  >>> I2C_1 Or I2C_2
+* 2. Newstate             >>> Functional_State its enumeration data type @ref "Functional_State"
+* it returns nothing !
+ */
 void I2C_Generate_Stop(volatile I2C_t *I2Cx , Functional_State Newstate)
 {
 	if(Newstate == ENABLE)
@@ -299,7 +334,15 @@ void I2C_Generate_Stop(volatile I2C_t *I2Cx , Functional_State Newstate)
 	}
 }
 
-
+//===========================================================================
+/**================================================================
+* I2C_Generate_ACK
+* this function used to generate Ack at the end of received byte.
+* INPUTS : it takes 3 arguments :
+* 1. I2Cx  				  >>> I2C_1 Or I2C_2
+* 2. Newstate             >>> Functional_State its enumeration data type @ref "Functional_State"
+* it returns nothing !
+ */
 void I2C_Generate_ACK(volatile I2C_t *I2Cx , Functional_State Newstate)
 {
 	if(Newstate == ENABLE)
@@ -361,7 +404,19 @@ void I2C_delay_ms(int x)
 	for(j=0;j<530;j++){}
 	}
 }
-
+//===========================================================================
+/**================================================================
+* I2C_Master_Tx
+* this function used to send data from Master to slaves that attached to the bus
+* INPUTS : it takes 6 arguments :
+* 1. I2Cx  				  >>> I2C_1 Or I2C_2
+* 2. Slave_address        >>> the address of the slave you want send data to
+* 3. data_buffer          >>> the data you want to send
+* 4. datalen              >>> size of the send data in bytes
+* 5. stop                 >>> stop_state its enumeration data type@ref "Stop_State"
+* 6. start         		  >>> start_state its enumeration data type@ref "Repeated_Start_State"
+* it returns nothing !
+ */
 void I2C_Master_Tx(volatile I2C_t *I2Cx , uint16_t Slave_address , uint8_t *data_buffer, uint32_t datalen,Stop_State stop,Repeated_Start_State start)
 {
 	uint32_t i ;
