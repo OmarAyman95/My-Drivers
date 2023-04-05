@@ -1,6 +1,6 @@
 /* 
  * File:   25LCxxxEEPROM_SPI.h
- * Author: OMAR
+ * Author: OMAR AYMAN
  *
  * Created on December 31, 2022, 10:40 AM
  * this HAL operates with these models: 
